@@ -1,0 +1,65 @@
+Akansh Tyagi
+7051002575 | akanshtyagi70@gmail.com | GitHub| LinkedIn
+EDUCATION
+ABES Institute of Technology Ghaziabad, IN
+B.Tech in Computer Science & Engineering July 2021-2025
+IIT Madras Madras, IN
+Diploma in Data Science and Applications Aug 2023-Oct 2025
+WORK EXPERIENCE
+Palat Technologies FPL India Pvt. Ltd Feb 2025-Present
+QA Automation Executive Noida, India Hybrid
+• Automated online ordering scenarios (pickup, dine-in, home delivery, gift cards) using Selenium and Playwright.
+• Built automation flows for payment gateways (Stripe, Square, JCC Pay, Authorize.net) ensuring accurate payment
+validation and order sync.
+• Improved payment flow stability across multiple gateways, reducing transaction failures by 20%.
+• Enhanced checkout modules (cart, saved cards, address) to minimize user drop-offs and improve order conversion.
+• Performed API testing and automation for order placement, POS sync, and loyalty reward systems.
+• Validated integrations with partner platforms (Toast, Clover, Uber Eats, Como) to maintain revenue accuracy.
+• Debugged and analyzed client activity logs to resolve production bugs and ensure smooth live operations.
+PROJECTS
+World cup Data Analytics - Cricket Analysis | Python, Web scrapping, Pandas, Power BI
+• Created a Power BI report to identify top 11 players for a T20 cricket team by scraping data from ESPNcricinfo
+with a Brightdata website tool, cleaning and transforming the data with pandas, and evaluating various player
+performance metrics.
+• Used the resulting Power BI dashboard to select players for various categories (openers, middle order/anchors,
+finishers, all-rounders, specialist fast bowlers) and ultimately choose the top 11 players to play in the match.
+• Selected team using the Power BI dashboard has 90% of chances to win the game.Implemented A/B testing and
+dashboards to track CTR (Click-Through Rate), latency, and zero-result rates.
+Movie Recommendation System | Machine Learning, NLP, Python
+• Content-based recommender for 5,000+ TMDB titles using Python and scikit-learn, delivering sub-second,
+highprecision suggestions.
+• Applied NLP (CountVectorizer, cosine similarity) to consolidate genres, cast, keywords, and achieving 95%+
+accuracy in blind tests.
+• Deployed Streamlit app with real-time TMDB API integration for dynamic poster display and user interaction.
+• Managed end-to-end ML workflow: JSON parsing, feature engineering, model serialization, and web deployment.
+Hybrid Search & Recommendation Engine | Elasticsearch, FastAPI, ML
+• Combined BM25 keyword search with vector embeddings to improve relevance.
+• Implemented personalized recommendations and typo-tolerant semantic queries.
+• Implemented A/B testing and dashboards to track CTR (Click-Through Rate), latency, and zero-result rates.
+
+Data Management Capstone Project with SUMOTO CROP SCIENCE COMPANY Dec 2024
+• Customer segmentation analysis using clustering techniques, increasing customer retention by 22% and boosting
+regionalsales revenue by 11%.
+• Designed predictive models for demand forecasting, reducing inventory costs by 7 % .
+• Implemented sales performance analytics, enhancing order prioritization and achieving a 15 % increase in high
+potential sales conversions.
+Order & Inventory Management System | Microservices, Kafka, FastAPI, PostgreSQL
+• A microservices-based Order & Inventory system with Kafka event streaming, achieving sub-100ms processing.
+• Designed REST APIs using FastAPI and Swagger UI, cutting integration effort by 40%.
+• Automated dev and deployment using Docker Compose and Poetry, reducing setup time by 60%.
+• A cloud-ready architecture deployable on AWS ECS (Elastic Container Service)/Kubernetes for horizontal scaling.
+CERTIFICATES & ACHIEVEMENTS
+Foundational Data Science and Programming Certification, IIT MADRAS May 2023
+Prompt Engineering Contest ImaGen AI, IIT Delhi - 2nd Place
+TECHNICAL SKILLS
+Languages & Data Management: Python, SQL (PostgreSQL)
+Machine Learning & Deep Learning: TensorFlow, PyTorch, Keras, Scikit-learn, Deep Learning, Gradient Boosting,
+Model Validation, Cross-Validation
+Natural Language Processing: NLP, Text Analysis, Semantic Search, Feature Engineering
+Statistical Analysis & Modeling: Exploratory Data Analysis (EDA), Statistical Modeling, Hypothesis Testing
+Data Visualization & Analytics: Matplotlib, Seaborn, Power BI
+Frameworks & Libraries: FastAPI, Flask, Pandas, NumPy
+Tools & Infrastructure: Docker, Kubernetes, Elasticsearch, Git, MLflow, Jupyter Notebook, Google Colab, Poetry,
+DVC Concepts & Specializations: Machine Learning Model Development, Model Risk Management, Risk Assessment,
+A/B Testing, Recommendation Systems, Model Interpretability, Production Deployment, Payment Systems Integration,
+Web Scraping, DBMS

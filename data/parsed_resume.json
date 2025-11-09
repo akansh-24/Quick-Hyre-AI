@@ -1,0 +1,25 @@
+{
+  "name": "Akansh Tyagi",
+  "email": "akanshtyagi70@gmail.com",
+  "phone": "7051002575",
+  "linkedin": null,
+  "github": null,
+  "skills": [
+    "Data Analysis",
+    "Deep Learning",
+    "Docker",
+    "Elasticsearch",
+    "Flask",
+    "Git",
+    "Jupyter",
+    "Keras",
+    "Kubernetes",
+    "Machine Learning",
+    "Microservices",
+    "Pandas",
+    "Python"
+  ],
+  "experience_years": 0,
+  "education": [],
+  "raw_text": "Akansh Tyagi\n7051002575 | akanshtyagi70@gmail.com | GitHub| LinkedIn\nEDUCATION\nIIT Madras\nBS in Data Science and Applications July 2022-2026\nPROJECTS\nWorld Cup Data Analytics - Cricket Analysis | Python, Web scrapping, Pandas, Power BI\n\u2022 Created a Power BI report to identify top 11 players for a T20 cricket team by scraping data from ESPNcricinfo with a\nBrightdata website tool, cleaning and transforming the data with pandas, and evaluating various player performance\nmetrics.\n\u2022 Used the resulting Power BI dashboard to select players for various categories (openers, middle order/anchors,\nfinishers, all-rounders, specialist fast bowlers) and ultimately choose the top 11 players to play in the match.\n\u2022 Selected team using the Power BI dashboard has 90% of chances to win the game.Implemented A/B testing and\ndashboards to track CTR (Click-Through Rate), latency, and zero-result rates.\nMovie Recommendation System | Machine Learning, NLP, Python\n\u2022 Content-based recommender for 5,000+ TMDB titles using Python and scikit-learn, delivering sub-second,\nhighprecision suggestions.\n\u2022 Applied NLP (CountVectorizer, cosine similarity) to consolidate genres, cast, keywords, and achieving 95%+\naccuracy in blind tests.\n\u2022 Deployed Streamlit app with real-time TMDB API integration for dynamic poster display and user interaction.\n\u2022 Managed end-to-end ML workflow: JSON parsing, feature engineering, model serialization, and web deployment.\nHybrid Search & Recommendation Engine | Elasticsearch, FastAPI, ML\n\u2022 Combined BM25 keyword search with vector embeddings to improve relevance.\n\u2022 Implemented personalized recommendations and typo-tolerant semantic queries.\n\u2022 Implemented A/B testing and dashboards to track CTR (Click-Through Rate), latency, and zero-result rates.\nOrder & Inventory Management System | Microservices, Kafka, FastAPI, PostgreSQL\n\u2022 A microservices-based Order & Inventory system with Kafka event streaming, achieving sub-100ms processing.\n\u2022 Designed REST APIs using FastAPI and Swagger UI, cutting integration effort by 40%.\n\u2022 Automated dev and deployment using Docker Compose and Poetry, reducing setup time by 60%.\n\u2022 A cloud-ready architecture deployable on AWS ECS (Elastic Container Service)/Kubernetes for horizontal scaling.\nTECHNICAL SKILLS\n\u2022 Languages & Data Management: Python, SQL (PostgreSQL)\n\u2022 Machine Learning & Deep Learning: TensorFlow, PyTorch, Keras, Scikit-learn, Deep Learning, Gradient\nBoosting,Model Validation, Cross-Validation\n\u2022 Natural Language Processing: NLP, Text Analysis, Semantic Search, Feature Engineering\n\u2022 Statistical Analysis & Modeling: Exploratory Data Analysis (EDA), Statistical Modeling, Hypothesis Testing\n\u2022 Data Visualization & Analytics: Matplotlib, Seaborn, Power BI\n\u2022 Frameworks & Libraries: FastAPI, Flask, Pandas, NumPy\n\u2022 Tools & Infrastructure: Docker, Kubernetes, Elasticsearch, Git, Jupyter Notebook, Google Colab, Poetry,\n\u2022 Specializations: Machine Learning Model Development, Model Risk Management, Risk Assessment, ,\nRecommendation Systems, Model Interpretability, Production Deployment, Payment Systems Integration, Web\nScraping, DBMS"
+}
