@@ -5,37 +5,37 @@ print("Testing installations...\n")
 # Test 1: PDF Processing
 try:
     import pdfplumber
-    print("✅ pdfplumber installed")
+    print(" pdfplumber installed")
 except:
-    print("❌ pdfplumber not found")
+    print(" pdfplumber not found")
 
 # Test 2: spaCy
 try:
     import spacy
     nlp = spacy.load("en_core_web_sm")
-    print("✅ spaCy installed and model loaded")
+    print("spaCy installed and model loaded")
 except:
-    print("❌ spaCy issue")
+    print(" spaCy issue")
 
 # Test 3: Sentence Transformers
 try:
     from sentence_transformers import SentenceTransformer
-    print("✅ Sentence-Transformers installed")
+    print(" Sentence-Transformers installed")
 except:
-    print("❌ Sentence-Transformers issue")
+    print(" Sentence-Transformers issue")
 
 # Test 4: FastAPI
 try:
     import fastapi
-    print("✅ FastAPI installed")
+    print(" FastAPI installed")
 except:
-    print("❌ FastAPI issue")
+    print(" FastAPI issue")
 
 # Test 5: Streamlit
 try:
     import streamlit
-    print("✅ Streamlit installed")
+    print(" Streamlit installed")
 except:
-    print("❌ Streamlit issue")
+    print(" Streamlit issue")
 
-print("\n🎉 Setup complete! You're ready to code.")
+print("\n Setup complete! You're ready to code.")
