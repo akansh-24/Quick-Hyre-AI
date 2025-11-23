@@ -25,5 +25,18 @@ def parse_with_gemini(raw_text, api_key):
         "You are a resume parser. Extract the following fields from the resume text:\n"
         "name, email, phone (if available), skills (list), experience (list of {title, company, start_date, end_date, bullets}), "
         "education (list of {degree, school, year}).\n"
-        "Return only JSON with these keys. Resume text:\n\n" + resume_text
-    )
+        "Return only JSON with these keys. Resume text:\n\n" + {resume_text})
+        #generate the content 
+        response = model.generate_content(prompt)
+        json_text=response.text
+        parsed_data=json.loads(json_text)
+
+        return parsed_data 
+    except json.JSONDecodeError:
+        print("Error:Not recieved valid json as a response:")
+        print(response.text)
+        return None
+
+
+
+
