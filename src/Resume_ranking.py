@@ -2,8 +2,16 @@ import PyPDF2
 import google.generativeai as genai
 import json
 import os
+import numpy as np
+
+# text similarity
+from sklearn.metrics.pairwise import cosine_similarity
+
+# embedding model
+from sentence_transformers import SentenceTransformer
 #generating text_Embeddings
-from sentence_tranformers import SenetenceTransformer
+from sentence_transformers import SentenceTransformer
+
 #math function ->comparing vector similarity 
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np 
@@ -13,9 +21,7 @@ if SentenceTranformer:
     BGE_MODEL=SenetenceTransformer('BAAI/bge-small-en-v1.5')
     if BGE_MODEL:
         # BGE_MODEL.encode performs the embedding conversion.
-        return BGE_MODEL.encode(texts, convert_to_tensor=False)# False ensure we get a numpy array back
-    else:
-        return None
+        BGE_MODEL.encode(texts, convert_to_tensor=False)# False ensure we get a numpy array back
 else:
     BGE_MODEL=None
 
