@@ -39,7 +39,20 @@ def rank_resumes(job_description, resumes_data):
     similarities=cosine_similarity(jd_embeddings,resume_embeddings)# comparing the resumes with the jd 
 
     #ranking for the students
+    ranked_results=[]
     for i, score in enumerate(similarities):
+        ranked_results.append({
+            'name': resumes_data[i].get('name', f'Resume {i+1}'),
+            'score': float(score),
+            'original_data': resumes_data[i] 
+        })
+
+    #sort the results in the descending order.
+    ranked_results.sort(key=lambda x:x['score'],reverse=True)
+
+    return ranked_results
+
+
         
 
     
