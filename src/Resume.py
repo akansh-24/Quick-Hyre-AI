@@ -106,28 +106,3 @@ def parse_with_gemini(raw_text, api_key):
         return parsed
     except json.JSONDecodeError as e:
         print("json.loads failed:", e)
-        
-if __name__ == "__main__":
-    # show env var for debugging
-    api_key = os.environ.get("GOOGLE_API_KEY")
-    print("GOOGLE_API_KEY set?:", bool(api_key))
-    if not api_key:
-        print("ERROR: GOOGLE_API_KEY env variable not set. Exiting.")
-        exit(1)
-
-    pdf_path = r"D:\Akansh_Data\Akansh Resume\sample_resume.pdf"
-    print("Reading PDF:", pdf_path)
-    raw = extract_text(pdf_path)
-    print("Extracted text length:", len(raw))
-
-    parsed = parse_with_gemini(raw, api_key)
-    print("\nFinal parsed result object:")
-    print(parsed)
-
-    # safely dump to file for inspection too
-    try:
-        with open("parsed_output.json", "w", encoding="utf-8") as fh:
-            fh.write(json.dumps(parsed, indent=4, ensure_ascii=False))
-        print("Wrote parsed_output.json")
-    except Exception as e:
-        print("Could not write parsed_output.json:", e)

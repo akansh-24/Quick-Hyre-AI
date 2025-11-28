@@ -156,15 +156,15 @@ if __name__ == "__main__":
     B.Tech in Computer Science - XYZ University (2018)
     """
     
-    print("🧪 Testing Skill Extractor\n")
+    print(" Testing Skill Extractor\n")
     
     skills = extract_skills(sample_resume)
     experience = extract_experience_years(sample_resume)
     education = extract_education(sample_resume)
     
-    print(f"💼 Skills Found ({len(skills)}):")
+    print(f" Skills Found ({len(skills)}):")
     for skill in skills:
         print(f"   - {skill}")
     
-    print(f"\n📅 Experience: {experience} years")
-    print(f"\n🎓 Education: {', '.join(education)}")
+    print(f"\nExperience: {experience} years")
+    print(f"\nEducation: {', '.join(education)}")

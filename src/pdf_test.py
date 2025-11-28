@@ -161,3 +161,182 @@ if __name__ == "__main__":
     print(json.dumps(parsed, indent=4))
 
 
+import PyPDF2
+import google.generativeai as genai
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+import json
+import os
+import re
+import time
+import traceback
+
+def extract_text(pdf_path):
+    with open(pdf_path, "rb") as file:
+        reader = PyPDF2.PdfReader(file)
+        text = ""
+        for page in reader.pages:
+            page_text = page.extract_text()
+            if page_text:
+                text += page_text + "\n"
+    return text
+
+def parse_with_gemini(raw_text, api_key, debug_file="gemini_debug.txt"):
+    """
+    Robust parser: prints debug info and returns dict or None.
+    """
+    def clean_text(s: str) -> str:
+        s = s.replace('\ufeff','')
+        s = s.replace('“','"').replace('”','"').replace("‘","'").replace("’","'")
+        s = s.replace('–','-').replace('—','-')
+        s = re.sub(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', '', s)
+        s = re.sub(r',\s*(\}|])', r'\1', s)
+        return s
+
+    # Configure
+    try:
+        genai.configure(api_key=api_key)
+    except Exception as e:
+        print("ERROR: genai.configure failed:", e)
+        return None
+
+    try:
+        model = genai.GenerativeModel("gemini-2.5-pro")
+    except Exception as e:
+        print("ERROR: Could not create GenerativeModel:", e)
+        # still try continuing below
+        model = None
+
+    # tighten the instruction to the model
+    prompt = (
+        "SYSTEM: ONLY return exactly one valid JSON object and nothing else. "
+        "Use double quotes for keys and strings, no trailing commas. "
+        "Fields: name, email, phone, skills, experience, education.\n\n"
+        f"{raw_text}"
+    )
+
+    print("Calling Gemini... (this may take a few seconds)")
+    try:
+        # keep two attempts: with temperature param if supported, otherwise without
+        try:
+            response = model.generate_content(prompt, temperature=0)
+        except TypeError:
+            response = model.generate_content(prompt)
+    except Exception as e:
+        print("ERROR: model.generate_content raised an exception:")
+        traceback.print_exc()
+        with open(debug_file, "w", encoding="utf-8") as fh:
+            fh.write("generate_content exception:\n")
+            fh.write(traceback.format_exc())
+        return None
+
+    # get text safely
+    try:
+        json_text = getattr(response, "text", None)
+        if not json_text:
+            # common fallback paths
+            try:
+                json_text = response.candidates[0].content.parts[0].text
+            except Exception:
+                json_text = str(response)
+    except Exception as e:
+        print("ERROR extracting text from response object:", e)
+        json_text = str(response)
+
+    # print repr preview and full small preview
+    print("=== repr(json_text) preview (first 1000 chars) ===")
+    print(repr(json_text)[:1000])
+    print("=== raw preview (first 1000 chars) ===")
+    print((json_text or "")[:1000])
+
+    # extract possible JSON block
+    m = re.search(r"```json(.*?)```", json_text or "", flags=re.S|re.I)
+    if m:
+        candidate = m.group(1).strip()
+        print("Found ```json block, using that.")
+    else:
+        m2 = re.search(r"```(?:json)?\s*(.*?)\s*```", json_text or "", flags=re.S|re.I)
+        if m2:
+            candidate = m2.group(1).strip()
+            print("Found ``` block, using that.")
+        else:
+            start = (json_text or "").find('{')
+            end = (json_text or "").rfind('}')
+            if start != -1 and end != -1 and end > start:
+                candidate = (json_text or "")[start:end+1]
+                print("Extracted substring from first '{' to last '}'.")
+            else:
+                candidate = json_text or ""
+                print("Using whole response as candidate (no braces found).")
+
+    candidate_clean = clean_text(candidate)
+
+    # try parse
+    try:
+        parsed = json.loads(candidate_clean)
+        print("✅ Parsed JSON successfully.")
+        return parsed
+    except json.JSONDecodeError as e:
+        print("❌ json.loads failed:", e)
+        # write debug to file and show error context
+        try:
+            ln, col = e.lineno, e.colno
+            lines = candidate_clean.splitlines()
+            err_line = lines[ln-1] if ln-1 < len(lines) else ""
+            context = err_line[max(0, col-80):col+80]
+            print(f"Error at line {ln} col {col}: ...{context}...")
+        except Exception:
+            pass
+
+        # aggressive cleaning attempt
+        candidate_more_clean = re.sub(r'[^\x00-\x7F]+', ' ', candidate_clean)
+        candidate_more_clean = re.sub(r'\s+,', ',', candidate_more_clean).strip()
+        try:
+            parsed = json.loads(candidate_more_clean)
+            print("✅ Parsed after aggressive cleaning.")
+            return parsed
+        except Exception as e2:
+            print("Still failed after aggressive cleaning:", e2)
+            # save debug traces to file
+            with open(debug_file, "w", encoding="utf-8") as fh:
+                fh.write("=== repr(original response) ===\n")
+                fh.write(repr(json_text) + "\n\n")
+                fh.write("=== candidate_clean ===\n")
+                fh.write(candidate_clean + "\n\n")
+                fh.write("=== candidate_more_clean ===\n")
+                fh.write(candidate_more_clean + "\n\n")
+                fh.write("exceptions:\n")
+                fh.write(str(e) + "\n" + str(e2) + "\n")
+            print(f"Wrote debug output to {debug_file}")
+            return None
+    except Exception as ex:
+        print("Unexpected parsing error:", ex)
+        with open(debug_file, "w", encoding="utf-8") as fh:
+            fh.write("unexpected parsing error:\n")
+            fh.write(traceback.format_exc())
+        return None
+
+if __name__ == "__main__":
+    # show env var for debugging
+    api_key = os.environ.get("GOOGLE_API_KEY")
+    print("GOOGLE_API_KEY set?:", bool(api_key))
+    if not api_key:
+        print("ERROR: GOOGLE_API_KEY env variable not set. Exiting.")
+        exit(1)
+
+    pdf_path = r"D:\Akansh_Data\Akansh Resume\sample_resume.pdf"
+    print("Reading PDF:", pdf_path)
+    raw = extract_text(pdf_path)
+    print("Extracted text length:", len(raw))
+
+    parsed = parse_with_gemini(raw, api_key)
+    print("\nFinal parsed result object (or None):")
+    print(parsed)
+
+    # safely dump to file for inspection too
+    try:
+        with open("parsed_output.json", "w", encoding="utf-8") as fh:
+            fh.write(json.dumps(parsed, indent=4, ensure_ascii=False))
+        print("Wrote parsed_output.json")
+    except Exception as e:
+        print("Could not write parsed_output.json:", e)
