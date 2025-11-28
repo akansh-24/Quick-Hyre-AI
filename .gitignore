@@ -18,3 +18,7 @@ Thumbs.db
 .idea/
 token.json
 client_secret.json
+.env
+token.json
+client_secret.json
+.env
