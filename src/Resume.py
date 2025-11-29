@@ -71,7 +71,7 @@ def parse_with_gemini(raw_text, api_key):
     try:
     # keep two attempts: with temperature param, and  without
         try:
-            response = model.generate_content(prompt, temperature=0)
+            response = model.generate_content(prompt)
             print("we are getting better response")
         except TypeError:
             response = model.generate_content(prompt)
