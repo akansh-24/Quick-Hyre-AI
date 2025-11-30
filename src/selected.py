@@ -58,7 +58,7 @@ def rank_resumes(jd_data, candidate_data):
     all_texts=[candidate_text, jd_text]
     embeddings=BGE_MODEL.encode(all_texts)
     emb= np.array(embeddings)
-     # Ensure emb is 2D: (n_docs, dim)
+     # Ensure emb is 2D:
     if emb.ndim == 1:
         emb = emb.reshape(1, -1)
     elif emb.ndim == 3:
